@@ -1,6 +1,6 @@
 # Employee Onboarding System
 
-This is a demo project for an Employee Onboarding System built using modern technologies such as **Java 21**, **Spring Boot 3.3.5**, **Hibernate**, **Flyway**, **MariaDB**, and **Redis**. The application demonstrates how to manage employee data, perform database migrations, and use caching for enhanced performance.
+This is a demo project for an Employee Onboarding System built using modern technologies such as **Java 21**, **Spring Boot 3.3.5**, **Hibernate**, **Flyway**, **MariaDB**, and **Redis**. The application demonstrates the steps involved in employee onboarding, with features for data persistence, versioned database schema migrations, and caching to optimize the performance
 
 ## **Tech Stack**
 
