@@ -25,16 +25,11 @@ public class KeycloakRoleConverter implements Converter<Jwt, Collection<GrantedA
         Collection<GrantedAuthority> resourceAuthorities = new ArrayList<>();
         Collection<GrantedAuthority> authorities = new ArrayList<>();
 
-        // 1. Collect Realm Roles
         Map<String, Object> realmAccess = jwt.getClaim("realm_access");
         if (realmAccess != null && realmAccess.containsKey("roles")) {
             List<String> realmRoles = (List<String>) realmAccess.get("roles");
             realmRoles.forEach(roleName -> realmAuthorities.add(new SimpleGrantedAuthority(roleName)));
         }
-       // log.info("Realm authorities: {}", realmAuthorities);
-       // log.info("resource name: {}", resourceName);
-
-        // 2. Collect Client Roles (api-backend)
         Map<String, Object> resourceAccess = jwt.getClaim("resource_access");
         if (resourceAccess != null && resourceAccess.containsKey(resourceName)) {
             Map<String, Object> clientRoles = (Map<String, Object>) resourceAccess.get(resourceName);

@@ -27,16 +27,12 @@ public class RedisStateMachinePersistent implements StateMachinePersister<Onboar
     @Override
     public StateMachine<OnboardingStates, OnboardingEvents> restore(StateMachine<OnboardingStates, OnboardingEvents> stateMachine, Long employeeId) throws Exception {
         String stateStr = redisTemplate.opsForValue().get(PREFIX + employeeId);
-
         if (stateStr != null) {
             OnboardingStates restoredState = OnboardingStates.valueOf(stateStr);
-            stateMachine.stop();
             stateMachine.getStateMachineAccessor().doWithAllRegions(access -> {
                 access.resetStateMachine(new DefaultStateMachineContext<>(restoredState, null, null, null));
             });
-            stateMachine.start();
         }
-
         return stateMachine;
     }
 }

@@ -12,6 +12,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableMethodSecurity
 public class SecurityConfiguration {
 
+    public static final String STOCKLIN_ADMIN = "stocklin_admin";
     private String resourceName = "stocklin-app";
 
     private static final String[] PUBLIC_PATHS = {
@@ -39,7 +40,7 @@ public class SecurityConfiguration {
         http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(PUBLIC_PATHS).permitAll()
-                        .requestMatchers("/api/employees/**").hasAuthority("stocklin_admin")
+                        .requestMatchers("/api/employees/**").hasAuthority(STOCKLIN_ADMIN)
                         .anyRequest().authenticated()
                 ).sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

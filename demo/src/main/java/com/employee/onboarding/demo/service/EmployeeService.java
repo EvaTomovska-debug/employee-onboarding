@@ -29,8 +29,8 @@ public class EmployeeService {
 
     private final Map<EmployeeType, EmployeeCreator> employeeCreators = Map.of(
             EmployeeType.SOFTWARE, request -> new SoftwareDeveloperBuilder()
-                  /*  .withSkills(request.getSkills())
-                    .withProgramingLanguage(request.getProgrammingLanguage())*/
+                    .withSkills(request.getSkills())
+                    .withProgramingLanguage(request.getProgrammingLanguage())
                     .withCommonFields(request)
                     .build(),
             EmployeeType.PLC, request -> new PlcDeveloperBuilder()
@@ -139,7 +139,6 @@ public class EmployeeService {
                 }))
                 .toList();
 
-        // Wait for all to complete
         CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
     }
 }
