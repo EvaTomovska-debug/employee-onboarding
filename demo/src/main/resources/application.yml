@@ -1,0 +1,66 @@
+server:
+  port: 8085
+  error:
+    include-message: always
+
+
+spring:
+  cloud:
+    compatibility-verifier:
+      enabled: false
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/Stocklin
+  datasource:
+    url: jdbc:mysql://localhost:3306/employee_onboarding
+    username: root
+    password: maria
+    driver-class-name: org.mariadb.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  flyway:
+    enabled: true
+    validate-on-migrate: true
+    locations: classpath:db.migration
+  application:
+    name: employee-onboarding
+
+logging:
+  level:
+    root: INFO
+    org:
+      hibernate: INFO
+      zalando:
+        logbook: TRACE
+      apache:
+        cxf: INFO
+      springframework:
+        orm:
+          jpa: DEBUG
+        security: DEBUG
+        transaction: DEBUG
+  config: classpath:logback-spring.xml
+
+management:
+  endpoints:
+    web:
+      base-path: /api/actuator
+      exposure:
+        include: "info, health"
+  endpoint:
+    health:
+      show-details: always
+      show-components: always
+      group:
+        liveness:
+          include: "ping"
+        readiness:
+          include: "*"
+      probes:
+        enabled: true
+
+
